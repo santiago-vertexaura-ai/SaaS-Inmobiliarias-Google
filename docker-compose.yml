@@ -1,0 +1,47 @@
+version: '3.3'
+
+services:
+  # --- SERVICIO DE WHATSAPP ---
+  evolution-api:
+    container_name: proptech_whatsapp
+    image: santi/evolution:fixed
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - AUTHENTICATION_API_KEY=mi_super_clave_secreta_123
+      - SERVER_URL=http://localhost:8080
+      - DATABASE_ENABLED=true
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://evolution:evolution_password@postgres:5432/evolution
+      - CACHE_REDIS_ENABLED=true
+      - CACHE_REDIS_URI=redis://redis:6379/0
+      - WEBSOCKET_ENABLED=true
+      - CORS_ORIGIN=*
+      - CORS_METHODS=POST,GET,PUT,DELETE,OPTIONS
+      - CORS_CREDENTIALS=true
+    depends_on:
+      - postgres
+      - redis
+
+  # --- BASE DE DATOS INTERNA ---
+  postgres:
+    container_name: proptech_postgres
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=evolution
+      - POSTGRES_PASSWORD=evolution_password
+      - POSTGRES_DB=evolution
+    volumes:
+      - evolution_data:/var/lib/postgresql/data
+
+  # --- CACHÉ ---
+  redis:
+    container_name: proptech_redis
+    image: redis:alpine
+    restart: always
+    command: redis-server --appendonly yes
+
+volumes:
+  evolution_data:
