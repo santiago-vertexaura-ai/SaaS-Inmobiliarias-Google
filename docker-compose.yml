@@ -1,0 +1,71 @@
+services:
+  # --- SERVICIO DE WHATSAPP (Evolution API) ---
+  evolution-api:
+    container_name: proptech_whatsapp
+    # Usamos la imagen oficial estable
+    image: atendai/evolution-api:v2.1.1
+    restart: always
+    ports:
+      - "8081:8080"
+    environment:
+      # AUTENTICACIÓN
+      - AUTHENTICATION_TYPE=apikey
+      - AUTHENTICATION_API_KEY=mi_super_clave_secreta_123
+      
+      # SERVIDOR
+      - SERVER_URL=http://localhost:8080
+      
+      # BASE DE DATOS
+      - DATABASE_ENABLED=true
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://evolution:evolution_password@postgres:5432/evolution
+      
+      # CACHÉ
+      - CACHE_REDIS_ENABLED=true
+      - CACHE_REDIS_URI=redis://redis:6379/0
+      
+      # --- CONFIGURACIÓN CRÍTICA WHATSAPP ---
+      # Esta línea fuerza una versión estable de WhatsApp Web para evitar errores de QR
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1028148389
+      - WEBSOCKET_ENABLED=true
+      - QRCODE_LIMIT=30
+      
+      # CORS
+      - CORS_ORIGIN=*
+      - CORS_METHODS=POST,GET,PUT,DELETE,OPTIONS
+      - CORS_CREDENTIALS=true
+
+    depends_on:
+      - postgres
+      - redis
+    
+    volumes:
+      - evolution_instances:/evolution/instances
+      - evolution_store:/evolution/store
+
+  # --- BASE DE DATOS ---
+  postgres:
+    container_name: proptech_postgres
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=evolution
+      - POSTGRES_PASSWORD=evolution_password
+      - POSTGRES_DB=evolution
+    volumes:
+      - evolution_data:/var/lib/postgresql/data
+
+  # --- CACHÉ ---
+  redis:
+    container_name: proptech_redis
+    image: redis:alpine
+    restart: always
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+volumes:
+  evolution_data:
+  evolution_instances:
+  evolution_store:
+  redis_data:
