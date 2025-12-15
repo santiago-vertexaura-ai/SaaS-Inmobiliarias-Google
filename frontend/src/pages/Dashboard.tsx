@@ -14,7 +14,7 @@ const METRICS: MetricData[] = [
   { label: 'Leads Cualificados', value: '432', change: '+8.1%', trend: 'up' },
   { label: 'Tasa Cualificación', value: '34.6%', change: '-2.1%', trend: 'down' },
   { label: 'Inmuebles Activos', value: '24', change: '0%', trend: 'neutral' },
-  { label: 'Tasa Conversión', value: '2.8%', change: '+0.4%', trend: 'up' },
+  { label: 'Documentos Analizados', value: '1,243', change: '+15.2%', trend: 'up' },
 ];
 
 const MetricCard: React.FC<{ metric: MetricData }> = ({ metric }) => (
@@ -47,20 +47,20 @@ const EvolutionChart = () => {
   const max = Math.max(...data.map(d => d.val));
 
   return (
-    <div className="w-full h-64 flex items-end justify-between gap-4 px-4 pb-2">
+    <div className="w-full h-64 flex items-end justify-between gap-3 px-6 pb-4">
       {data.map((d, i) => (
-        <div key={i} className="flex flex-col items-center gap-2 flex-1 group">
+        <div key={i} className="flex flex-col items-center gap-3 flex-1 group">
            <div className="relative w-full flex items-end justify-center h-full">
              <div 
-               className="w-full max-w-[40px] bg-neutral-900 rounded-t-md transition-all duration-500 hover:bg-neutral-800 relative group-hover:shadow-lg"
-               style={{ height: `${(d.val / max) * 100}%` }}
+               className="w-full bg-neutral-900 rounded-t-lg transition-all duration-300 hover:bg-neutral-700 relative cursor-pointer shadow-sm"
+               style={{ height: `${(d.val / max) * 100}%`, minHeight: '20px' }}
              >
-               <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-neutral-900 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+               <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-neutral-900 text-white text-xs py-1.5 px-3 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 shadow-lg">
                  {d.val} leads
                </div>
              </div>
            </div>
-           <span className="text-xs font-medium text-neutral-500">{d.day}</span>
+           <span className="text-sm font-medium text-neutral-600">{d.day}</span>
         </div>
       ))}
     </div>

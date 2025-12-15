@@ -136,7 +136,7 @@ export default function WhatsApp() {
             </header>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-repeat bg-opacity-10">
+            <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-neutral-50">
               {MOCK_MESSAGES.map(msg => (
                 <div key={msg.id} className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'}`}>
                   <div className={`max-w-[70%] px-4 py-2 rounded-lg shadow-sm text-sm relative group ${
@@ -196,20 +196,27 @@ export default function WhatsApp() {
           <div className="p-6 space-y-6">
             
             {/* AI Toggle Section */}
-            <div className="bg-purple-50 p-4 rounded-xl border border-purple-100">
-               <div className="flex items-center justify-between mb-2">
+            <div className="bg-white p-4 rounded-lg border border-neutral-200">
+               <div className="flex items-center justify-between">
                  <div className="flex items-center gap-2">
-                   <Bot size={18} className="text-purple-600" />
-                   <span className="font-semibold text-sm text-purple-900">Agente IA</span>
+                   <Bot size={16} className="text-neutral-600" />
+                   <span className="font-medium text-sm text-neutral-900">Agente IA</span>
                  </div>
-                 <button onClick={toggleAi} className="text-purple-600 hover:text-purple-800 transition-colors">
-                   {aiEnabled ? <ToggleRight size={32} /> : <ToggleLeft size={32} className="text-neutral-400" />}
+                 <button 
+                   onClick={toggleAi} 
+                   className={`relative w-11 h-6 rounded-full transition-colors ${
+                     aiEnabled ? 'bg-neutral-900' : 'bg-neutral-200'
+                   }`}
+                 >
+                   <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                     aiEnabled ? 'translate-x-6' : 'translate-x-1'
+                   }`} />
                  </button>
                </div>
-               <p className="text-xs text-purple-700 leading-relaxed">
+               <p className="text-xs text-neutral-500 mt-2">
                  {aiEnabled 
-                   ? 'El agente está activo y responderá automáticamente a este lead.' 
-                   : 'El agente está en pausa. Tienes el control manual del chat.'}
+                   ? 'Respuestas automáticas activadas' 
+                   : 'Control manual del chat'}
                </p>
             </div>
 

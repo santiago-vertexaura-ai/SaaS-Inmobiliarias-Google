@@ -44,29 +44,29 @@ interface Lead {
 
 const MOCK_LEADS: Lead[] = [
   { 
-    id: '1', name: 'Ana García', email: 'ana.garcia@gmail.com', phone: '+34 612 345 678', date: '2023-10-24', status: 'Nuevo', score: 85, propertyInterest: 'Ático en Centro', lastActivity: '2h',
+    id: '1', name: 'Ana García', email: 'ana.garcia@gmail.com', phone: '+34 612 345 678', date: '2023-10-24', status: 'Nuevo', score: 85, propertyInterest: 'Ático en Centro - Calle Alcalá 45, 3º Ext', lastActivity: '2h',
     occupation: 'Abogada', familyMembers: 2, hasPets: false, incomeRange: '60k - 80k', comments: 'Busca zona tranquila, necesita garaje.',
-    aiSummary: 'Perfil financiero sólido. La ocupación sugiere estabilidad. Coincide con el precio del inmueble objetivo.'
+    aiSummary: 'Lead de alta calidad con perfil financiero sólido y estabilidad laboral demostrada. La ocupación como abogada sugiere ingresos regulares que coinciden con el rango de precio del inmueble objetivo. Requiere seguimiento prioritario para concretar visita.'
   },
   { 
-    id: '2', name: 'Carlos Ruiz', email: 'carlos.ruiz@hotmail.com', phone: '+34 699 887 766', date: '2023-10-23', status: 'Validación', score: 92, propertyInterest: 'Chalet Mirasierra', lastActivity: '1d',
+    id: '2', name: 'Carlos Ruiz', email: 'carlos.ruiz@hotmail.com', phone: '+34 699 887 766', date: '2023-10-23', status: 'Validación', score: 92, propertyInterest: 'Chalet Mirasierra - Urbanización Los Robles, nº 12', lastActivity: '1d',
     occupation: 'Ingeniero Software', familyMembers: 4, hasPets: true, petsDetail: '2 Perros grandes', incomeRange: '> 100k', comments: 'Necesita jardín grande para los perros.',
-    aiSummary: 'Score muy alto debido a ingresos declarados. Urgencia media. El jardín es un requisito bloqueante.'
+    aiSummary: 'Perfil excepcional con score de 92/100. Los ingresos declarados superan ampliamente el precio del inmueble. La necesidad de jardín amplio es un requisito crítico no negociable. Urgencia media, recomendado agilizar documentación para cierre rápido.'
   },
   { 
-    id: '3', name: 'Marta López', email: 'marta.lopez@empresa.com', phone: '+34 600 112 233', date: '2023-10-22', status: 'Esperando Documentacion', score: 60, propertyInterest: 'Piso 3 Habitaciones', lastActivity: '3d',
+    id: '3', name: 'Marta López', email: 'marta.lopez@empresa.com', phone: '+34 600 112 233', date: '2023-10-22', status: 'Esperando Documentacion', score: 60, propertyInterest: 'Piso 3 Hab. Zona Sur - Calle Toledo 89, 2º Izq', lastActivity: '3d',
     occupation: 'Autónoma (Diseño)', familyMembers: 1, hasPets: true, petsDetail: '1 Gato', incomeRange: '30k - 45k', comments: 'Primera vivienda. Dudas sobre hipoteca.',
-    aiSummary: 'Score moderado por incertidumbre en financiación siendo autónoma. Requiere asesoramiento hipotecario.'
+    aiSummary: 'Score moderado debido a incertidumbre en financiación al ser autónoma. Primera vivienda, requiere asesoramiento hipotecario especializado. Potencial de conversión medio-alto si se resuelven dudas financieras. Programar llamada con asesor bancario.'
   },
   { 
-    id: '4', name: 'Jorge Buxó', email: 'jorge.buxo@gmail.com', phone: '+34 655 443 322', date: '2023-10-20', status: 'Cualificado', score: 75, propertyInterest: 'Ático en Centro', lastActivity: '5d',
+    id: '4', name: 'Jorge Buxó', email: 'jorge.buxo@gmail.com', phone: '+34 655 443 322', date: '2023-10-20', status: 'Cualificado', score: 75, propertyInterest: 'Ático Centro - Plaza Mayor 8, Ático C', lastActivity: '5d',
     occupation: 'Funcionario', familyMembers: 3, hasPets: false, incomeRange: '45k - 60k', comments: 'Quiere mudarse en 3 meses.',
-    aiSummary: 'Ingresos estables garantizados. Buen perfil, aunque el presupuesto está ajustado para la zona centro.'
+    aiSummary: 'Perfil con ingresos estables garantizados por condición de funcionario. El presupuesto está ajustado para la zona centro pero es viable. Plazo de mudanza de 3 meses indica urgencia real. Priorizar negociación de precio para facilitar cierre.'
   },
   { 
-    id: '5', name: 'Elena Nito', email: 'elena.nito@outlook.com', phone: '+34 611 222 333', date: '2023-10-18', status: 'No Interesado', score: 20, propertyInterest: 'Estudio Malasaña', lastActivity: '1w',
+    id: '5', name: 'Elena Nito', email: 'elena.nito@outlook.com', phone: '+34 611 222 333', date: '2023-10-18', status: 'No Interesado', score: 20, propertyInterest: 'Estudio Malasaña - Calle Fuencarral 120', lastActivity: '1w',
     occupation: 'Estudiante', familyMembers: 1, hasPets: false, incomeRange: '< 20k', comments: 'Solo alquiler, no compra.',
-    aiSummary: 'Cliente descartado para venta. Redirigir a departamento de alquileres si procede.'
+    aiSummary: 'Cliente descartado para venta. El perfil y presupuesto no corresponden a adquisición de propiedad. Redirigir al departamento de alquileres si la empresa ofrece ese servicio. No requiere seguimiento adicional en este embudo.'
   },
 ];
 
@@ -138,25 +138,17 @@ const LeadDrawer = ({ lead, onClose }: { lead: Lead | null, onClose: () => void 
           
           {/* AI Score Analysis */}
           <section className="bg-gradient-to-br from-indigo-50 to-purple-50 p-5 rounded-xl border border-indigo-100">
-             <div className="flex justify-between items-center mb-3">
+             <div className="flex justify-between items-center mb-4">
                 <h3 className="text-sm font-bold text-indigo-900 uppercase tracking-wider flex items-center gap-2">
-                  <BrainCircuit size={16} /> Análisis de Score IA
+                  <BrainCircuit size={16} /> Análisis IA
                 </h3>
                 <div className="bg-white px-3 py-1 rounded-full shadow-sm border border-indigo-100">
                    <span className="text-lg font-bold text-indigo-600">{lead.score}/100</span>
                 </div>
              </div>
-             <p className="text-sm text-indigo-800 leading-relaxed">
+             <p className="text-sm text-indigo-900 leading-relaxed">
                {lead.aiSummary}
              </p>
-             <div className="mt-4 flex gap-2">
-                <span className="text-xs font-medium bg-white/60 text-indigo-700 px-2 py-1 rounded border border-indigo-100">
-                   Ingresos: {lead.incomeRange}
-                </span>
-                <span className="text-xs font-medium bg-white/60 text-indigo-700 px-2 py-1 rounded border border-indigo-100">
-                   Ocupación: {lead.occupation}
-                </span>
-             </div>
           </section>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -203,20 +195,31 @@ const LeadDrawer = ({ lead, onClose }: { lead: Lead | null, onClose: () => void 
             </section>
           </div>
 
+          {/* Inmueble de Interés */}
+          <section>
+             <h3 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <Home size={16} /> Inmueble de Interés
+            </h3>
+            <div className="p-4 border-2 border-neutral-200 rounded-xl bg-white shadow-sm">
+              <div className="flex items-start gap-3">
+                <div className="w-12 h-12 bg-neutral-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Home size={24} className="text-neutral-600" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-neutral-900 text-base mb-1">{lead.propertyInterest}</p>
+                  <p className="text-xs text-neutral-500">Referencia del inmueble consultado</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Comentarios Adicionales */}
           <section>
              <h3 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider mb-4 flex items-center gap-2">
-              <FileText size={16} /> Resumen Solicitud
+              <FileText size={16} /> Comentarios y Requisitos
             </h3>
             <div className="p-4 border border-neutral-200 rounded-xl bg-neutral-50">
-              <div className="mb-4">
-                 <p className="text-xs text-neutral-500 uppercase font-semibold mb-1">Interés Principal</p>
-                 <p className="font-medium text-neutral-900">{lead.propertyInterest}</p>
-              </div>
-              <div>
-                 <p className="text-xs text-neutral-500 uppercase font-semibold mb-1">Comentarios</p>
-                 <p className="text-sm text-neutral-600 italic">"{lead.comments}"</p>
-              </div>
+              <p className="text-sm text-neutral-700 leading-relaxed">"{lead.comments}"</p>
             </div>
           </section>
 

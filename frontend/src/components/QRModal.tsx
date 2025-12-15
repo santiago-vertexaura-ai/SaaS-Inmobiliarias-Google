@@ -46,14 +46,14 @@ export default function QRModal({
           {isLoading ? (
             <div className="flex flex-col items-center gap-4">
               <Loader2 className="animate-spin text-neutral-900" size={48} />
-              <p className="text-neutral-500 text-sm">Generando sesión con Evolution API...</p>
+              <p className="text-neutral-500 text-sm">Generando conexión con WhatsApp... esto tomará solo unos segundos</p>
             </div>
           ) : connected ? (
              <div className="flex flex-col items-center gap-4 text-center">
               <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mb-2">
                 <CheckCircle2 size={32} />
               </div>
-              <h4 className="text-xl font-medium text-neutral-900">¡Conexión Exitosa!</h4>
+              <h4 className="text-xl font-medium text-neutral-900">¡Conexión con WhatsApp Exitosa!</h4>
               <p className="text-neutral-500 text-sm">Tu instancia de WhatsApp está sincronizada.</p>
               <button 
                 onClick={onClose}
@@ -91,7 +91,7 @@ export default function QRModal({
         {/* Footer (Hint) */}
         {!connected && !isLoading && qrCode && (
           <div className="bg-neutral-50 px-6 py-3 text-center border-t border-neutral-100">
-            <p className="text-xs text-neutral-400">Powered by Evolution API</p>
+            <p className="text-xs text-neutral-400">Powered by WhatsApp API</p>
           </div>
         )}
       </div>

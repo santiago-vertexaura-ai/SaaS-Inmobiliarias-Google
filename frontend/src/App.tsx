@@ -5,6 +5,10 @@ import Dashboard from './pages/Dashboard';
 import Leads from './pages/Leads';
 import Integrations from './pages/Integrations';
 import WhatsApp from './pages/WhatsApp';
+import AIAgents from './pages/AIAgents';
+import Automations from './pages/Automations';
+import Team from './pages/Team';
+import Help from './pages/Help';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -35,9 +39,13 @@ export default function App() {
           {currentView === 'leads' && <Leads />}
           {currentView === 'integrations' && <Integrations />}
           {currentView === 'whatsapp' && <WhatsApp />}
+          {currentView === 'ai-agents' && <AIAgents />}
+          {currentView === 'automations' && <Automations />}
+          {currentView === 'team' && <Team />}
+          {currentView === 'help' && <Help />}
           
           {/* Placeholder for other views */}
-          {(!['dashboard', 'leads', 'integrations', 'whatsapp'].includes(currentView)) && (
+          {(!['dashboard', 'leads', 'integrations', 'whatsapp', 'ai-agents', 'automations', 'team', 'help'].includes(currentView)) && (
              <div className="flex flex-col items-center justify-center h-full text-neutral-400">
                <Plug size={48} className="mb-4 opacity-20" />
                <p>Esta sección está en construcción para el MVP.</p>
